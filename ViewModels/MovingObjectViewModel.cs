@@ -9,28 +9,26 @@ namespace EmdrProject.ViewModels;
 
 public class MovingObjectViewModel : ReactiveObject
 {
+    // Reactive attributes
+    [Reactive] private bool IsMovingStarted { get; set; }
+    [Reactive] private bool IsLeft { get; set; } = true;
+    [Reactive] private bool IsRight { get; set; }
+    [Reactive] private int Amount { get; set; } = 20;
+
+    // Primitive types
     private double _xPosition;
     private double _yPosition;
     private SolidColorBrush? _color;
-    private double _screenWidth = 800;
-    private double _objectWidth = 10;
-    
-    [Reactive] public bool IsMovingStarted { get; set; }
+
 
     public MovingObjectViewModel()
     {
         XPosition = 0;
         Color = SolidColorBrush.Parse("#FF0000"); // kırmızı renk atanıyor.
 
-        StartMovingCommand = ReactiveCommand.Create(() =>
-        {
-            IsMovingStarted = true;
-        });
-        
-        StopMovingCommand = ReactiveCommand.Create(() =>
-        {
-            IsMovingStarted = false;
-        });
+        StartMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = true; });
+
+        StopMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = false; });
 
         this.WhenAnyValue(model => model.IsMovingStarted).Subscribe(async isMovingStarted =>
         {
@@ -38,22 +36,53 @@ public class MovingObjectViewModel : ReactiveObject
             await MoveSquare();
         });
 
+        this.WhenAnyValue(model => model.IsLeft).Subscribe(async isLeft =>
+        {
+            if (isLeft)
+                IsRight = false;
+        });
+
+        this.WhenAnyValue(model => model.IsRight).Subscribe(async isRight =>
+        {
+            if (isRight)
+                IsLeft = false;
+        });
     }
-    
+
+
     private async Task MoveSquare()
     {
         while (IsMovingStarted)
         {
-            await Task.Delay(20); // Hareketin hızını ayarlamak için bekleme süresi
-
-            // XPosition değerini artırarak kareyi hareket ettir
-            XPosition += 1;
-
-            // Eğer kare sağ kenara ulaştıysa, sol kenara dön
-            if (XPosition >= 800) // Kare genişliği sabit olarak 800 varsayıldı
+            if (IsLeft)
             {
-                XPosition = 0;
+                await Task.Delay(20);
+                XPosition += Amount;
+                UpdateEdge(XPosition);
             }
+
+            if (IsRight)
+            {
+                await Task.Delay(20);
+                XPosition -= Amount;
+                if (XPosition <= 0)
+                {
+                    IsLeft = true;
+                }
+            }
+        }
+    }
+
+    private void UpdateEdge(double xPosition)
+    {
+
+        if (xPosition >= 750)
+        {
+            IsRight = true;
+        }
+        else
+        {
+            IsLeft = true;
         }
     }
 
@@ -62,7 +91,7 @@ public class MovingObjectViewModel : ReactiveObject
         get => _xPosition;
         set => this.RaiseAndSetIfChanged(ref _xPosition, value);
     }
-    
+
     public double YPosition
     {
         get => _yPosition;
@@ -77,5 +106,4 @@ public class MovingObjectViewModel : ReactiveObject
 
     public ReactiveCommand<Unit, Unit> StartMovingCommand { get; set; }
     public ReactiveCommand<Unit, Unit> StopMovingCommand { get; set; }
-
 }
