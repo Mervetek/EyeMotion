@@ -61,7 +61,7 @@ public class MovingObjectViewModel : ReactiveObject
                 UpdateEdge(XPosition);
             }
 
-            if (IsRight)
+            else
             {
                 await Task.Delay(20);
                 XPosition -= Amount;
