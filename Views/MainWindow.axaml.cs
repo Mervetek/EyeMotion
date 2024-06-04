@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MoveObject.Views;
+namespace EmdrProject.Views;
 
 public partial class MainWindow : Window
 {

@@ -1,11 +1,11 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using MoveObject.ViewModels;
-using MoveObject.Views;
+using EmdrProject.ViewModels;
+using EmdrProject.Views;
 using Splat;
 
-namespace MoveObject;
+namespace EmdrProject;
 
 public partial class App : Application
 {

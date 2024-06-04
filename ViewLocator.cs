@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using MoveObject.ViewModels;
+using EmdrProject.ViewModels;
 
-namespace MoveObject;
+namespace EmdrProject;
 
 public class ViewLocator : IDataTemplate
 {

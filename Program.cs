@@ -2,7 +2,7 @@
 using Avalonia.ReactiveUI;
 using System;
 
-namespace MoveObject;
+namespace EmdrProject;
 
 sealed class Program
 {

@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace MoveObject.Views;
+namespace EmdrProject.Views;
 
 public partial class MovingObjectView : UserControl
 {

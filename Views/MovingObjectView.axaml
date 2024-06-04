@@ -2,21 +2,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:MoveObject.ViewModels"
+             xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
              x:DataType="viewModels:MovingObjectViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MoveObject.Views.MovingObjectView">
-    
+             x:Class="EmdrProject.Views.MovingObjectView">
+
     <Design.DataContext>
         <viewModels:MovingObjectViewModel></viewModels:MovingObjectViewModel>
     </Design.DataContext>
-    
-    <StackPanel>
-           <Canvas>
-               <Rectangle Width="50" Height="50" Fill="{Binding Color}" Canvas.Left="{Binding XPosition}" Canvas.Top="{Binding YPosition}" />
-           </Canvas>
-           <Button Content="Move" HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Command="{Binding MoveCommand}" />
-       </StackPanel>
+
+    <UniformGrid Columns="1">
+        <Canvas>
+            <Rectangle Width="50" Height="50" Fill="{Binding Color}" Canvas.Left="{Binding XPosition}"
+                       Canvas.Top="{Binding YPosition}" />
+        </Canvas>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Start" HorizontalAlignment="Center"
+                    Background="Green"
+                    VerticalAlignment="Center"
+                    Command="{Binding StartMovingCommand}" />
+            <Button Content="Stop" HorizontalAlignment="Center"
+                    Background="Chocolate"
+                    VerticalAlignment="Center"
+                    Command="{Binding StopMovingCommand}" />
+        </StackPanel>
+
+    </UniformGrid>
 </UserControl>

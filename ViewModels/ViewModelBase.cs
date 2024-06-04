@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace MoveObject.ViewModels;
+namespace EmdrProject.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

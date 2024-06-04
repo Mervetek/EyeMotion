@@ -3,53 +3,66 @@ using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
-namespace MoveObject.ViewModels;
+namespace EmdrProject.ViewModels;
 
 public class MovingObjectViewModel : ReactiveObject
 {
     private double _xPosition;
     private double _yPosition;
-    private SolidColorBrush _color;
+    private SolidColorBrush? _color;
     private double _screenWidth = 800;
     private double _objectWidth = 10;
+    
+    [Reactive] public bool IsMovingStarted { get; set; }
 
     public MovingObjectViewModel()
     {
-        // Default değerler
         XPosition = 0;
-        YPosition = 0;
-        Color = SolidColorBrush.Parse("#FF0000"); // Siyah renk atanıyor.
-        
-        MoveCommand = ReactiveCommand.Create(MoveStep);
+        Color = SolidColorBrush.Parse("#FF0000"); // kırmızı renk atanıyor.
 
-    }
-
-
-    private async Task MoveStep()
-    {
-        double startX = 0;
-        var duration = TimeSpan.FromSeconds(1);
-        var startTime = DateTime.Now;
-        
-        while (DateTime.Now - startTime < duration)
+        StartMovingCommand = ReactiveCommand.Create(() =>
         {
-            double progress = (DateTime.Now - startTime).TotalMilliseconds / duration.TotalMilliseconds;
-            XPosition = startX + (_screenWidth - startX) * progress;
-            await Task.Delay(16); // ~60 FPS
-        }
-        // Nesnenin XPosition özelliğini adım büyüklüğü kadar artır
-        XPosition = _screenWidth;
+            IsMovingStarted = true;
+        });
         
-    }
+        StopMovingCommand = ReactiveCommand.Create(() =>
+        {
+            IsMovingStarted = false;
+        });
 
+        this.WhenAnyValue(model => model.IsMovingStarted).Subscribe(async isMovingStarted =>
+        {
+            if (!isMovingStarted) return;
+            await MoveSquare();
+        });
+
+    }
+    
+    private async Task MoveSquare()
+    {
+        while (IsMovingStarted)
+        {
+            await Task.Delay(20); // Hareketin hızını ayarlamak için bekleme süresi
+
+            // XPosition değerini artırarak kareyi hareket ettir
+            XPosition += 1;
+
+            // Eğer kare sağ kenara ulaştıysa, sol kenara dön
+            if (XPosition >= 800) // Kare genişliği sabit olarak 800 varsayıldı
+            {
+                XPosition = 0;
+            }
+        }
+    }
 
     public double XPosition
     {
         get => _xPosition;
         set => this.RaiseAndSetIfChanged(ref _xPosition, value);
     }
-
+    
     public double YPosition
     {
         get => _yPosition;
@@ -62,6 +75,7 @@ public class MovingObjectViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _color, value);
     }
 
-    public ReactiveCommand<Unit, Task> MoveCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> StartMovingCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> StopMovingCommand { get; set; }
 
 }

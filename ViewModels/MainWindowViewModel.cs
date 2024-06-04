@@ -1,6 +1,7 @@
-﻿using ReactiveUI.Fody.Helpers;
+﻿
+using ReactiveUI.Fody.Helpers;
 
-namespace MoveObject.ViewModels;
+namespace EmdrProject.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
