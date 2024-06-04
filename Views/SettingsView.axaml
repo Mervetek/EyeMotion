@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
+        mc:Ignorable="d" 
+        x:Class="EmdrProject.Views.SettingsView">
+   
+    <Design.DataContext>
+        <viewModels:SettingsViewModel></viewModels:SettingsViewModel>
+    </Design.DataContext>
+    
+    
+    <Border Background="LightGray" CornerRadius="4">
+        <StackPanel Spacing="4">
+            <UniformGrid Columns="2">
+                <TextBlock Text="Speed:" VerticalAlignment="Center" />
+                <NumericUpDown Minimum="1" Maximum="100" Increment="1" Value="1" />
+            </UniformGrid>
+          <UniformGrid Columns="2">
+              <TextBlock Text="Color" VerticalAlignment="Center" />
+              <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
+                  <ComboBoxItem>Red</ComboBoxItem>
+                  <ComboBoxItem>Green</ComboBoxItem>
+                  <ComboBoxItem>Blue</ComboBoxItem>
+                  <ComboBoxItem>Black</ComboBoxItem>
+              </ComboBox>
+          </UniformGrid>
+            <UniformGrid Columns="2">
+                <TextBlock Text="Shape:" VerticalAlignment="Center" />
+                <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
+                    <ComboBoxItem>Triangle</ComboBoxItem>
+                    <ComboBoxItem>Rectangle</ComboBoxItem>
+                    <ComboBoxItem>Circle</ComboBoxItem>
+                </ComboBox>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+
+</Window>

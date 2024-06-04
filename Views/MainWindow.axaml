@@ -18,6 +18,19 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <views:MovingObjectView DataContext="{Binding MovingObject}" />
+    <DockPanel Margin="8">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Settings">
+                <MenuItem Header="Yeni" Command="{Binding OpenSettingsWindow}"/>
+               
+            </MenuItem>
+            <!-- Başka menü öğeleri ekleyebilirsiniz -->
+        </Menu>
+        
+        <!-- Ana içerik buraya eklenebilir -->
+        
+        <views:MovingObjectView Margin="0,159,0,0" DataContext="{Binding MovingObject}" />
+
+    </DockPanel>
 
 </Window>
