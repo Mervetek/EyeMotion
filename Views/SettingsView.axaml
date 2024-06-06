@@ -1,24 +1,45 @@
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" 
-        x:Class="EmdrProject.Views.SettingsView">
+        x:Class="EmdrProject.Views.SettingsView"
+        x:DataType="viewModels:SettingsViewModel">
    
     <Design.DataContext>
-        <viewModels:SettingsViewModel></viewModels:SettingsViewModel>
+        <viewModels:SettingsViewModel RepeatCount="30" Speed="10" Color="Red" ShapeType="Rectangle" />
     </Design.DataContext>
     
     
-    <Border Background="LightGray" CornerRadius="4">
-        <StackPanel Spacing="4">
+    <Border CornerRadius="4" Padding="16">
+        <StackPanel Spacing="8">
+            <avalonia:MaterialIcon
+                Kind="Home"
+                Foreground="Red"
+                Background="Red"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="32"
+                Height="32" />
+            <!-- Period -->
+            <UniformGrid Columns="2">
+                <TextBlock Text="Period:" VerticalAlignment="Center" />
+                <TextBox Text="{Binding RepeatCount}" />
+            </UniformGrid>
+    
+            <!-- Speed -->
             <UniformGrid Columns="2">
                 <TextBlock Text="Speed:" VerticalAlignment="Center" />
-                <NumericUpDown Minimum="1" Maximum="100" Increment="1" Value="1" />
+                <NumericUpDown Minimum="1" Maximum="100"
+                               Increment="1" Value="1"
+                               Text="{Binding Speed}" />
             </UniformGrid>
+    
+            <!-- Color -->
           <UniformGrid Columns="2">
-              <TextBlock Text="Color" VerticalAlignment="Center" />
+              <TextBlock Text="Color:" VerticalAlignment="Center" />
               <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
                   <ComboBoxItem>Red</ComboBoxItem>
                   <ComboBoxItem>Green</ComboBoxItem>
@@ -26,6 +47,8 @@
                   <ComboBoxItem>Black</ComboBoxItem>
               </ComboBox>
           </UniformGrid>
+    
+            <!-- Shape -->
             <UniformGrid Columns="2">
                 <TextBlock Text="Shape:" VerticalAlignment="Center" />
                 <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
@@ -36,5 +59,5 @@
             </UniformGrid>
         </StackPanel>
     </Border>
-
-</Window>
+   
+</UserControl>

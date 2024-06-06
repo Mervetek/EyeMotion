@@ -3,8 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
+             xmlns:md="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:DataType="viewModels:MovingObjectViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
              x:Class="EmdrProject.Views.MovingObjectView">
 
     <Design.DataContext>
@@ -13,8 +15,11 @@
 
     <UniformGrid Columns="1">
         <Canvas>
-            <Rectangle Width="50" Height="50" Fill="{Binding Color}" Canvas.Left="{Binding XPosition}"
-                       Canvas.Top="{Binding YPosition}" />
+            <Border Background="Red" Canvas.Left="{Binding XPosition}" Canvas.Top="{Binding YPosition}">
+                <Image Width="40" Height="40"
+                       Source="avares://EmdrProject/Assets/rectangle.png" />
+            </Border>
+
         </Canvas>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Start" HorizontalAlignment="Center"

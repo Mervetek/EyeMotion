@@ -14,6 +14,7 @@ public class MovingObjectViewModel : ReactiveObject
     [Reactive] private bool IsLeft { get; set; } = true;
     [Reactive] private bool IsRight { get; set; }
     [Reactive] private int Amount { get; set; } = 20;
+    
 
     // Primitive types
     private double _xPosition;
@@ -47,6 +48,8 @@ public class MovingObjectViewModel : ReactiveObject
             if (isRight)
                 IsLeft = false;
         });
+        
+       
     }
 
 

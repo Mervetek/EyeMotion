@@ -19,13 +19,15 @@
     </Design.DataContext>
 
     <DockPanel Margin="8">
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Settings">
-                <MenuItem Header="Yeni" Command="{Binding OpenSettingsWindow}"/>
-               
-            </MenuItem>
-            <!-- Başka menü öğeleri ekleyebilirsiniz -->
-        </Menu>
+        <!-- </Menu> -->
+        <Button DockPanel.Dock="Top" Content="Settings">
+            <Button.Flyout>
+                <!-- Flyout -->
+                <Flyout>
+                   <views:SettingsView DataContext="{Binding Settings}" />
+                </Flyout>
+            </Button.Flyout>
+        </Button>
         
         <!-- Ana içerik buraya eklenebilir -->
         
