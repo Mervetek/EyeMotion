@@ -3,7 +3,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
-        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" 
         x:Class="EmdrProject.Views.SettingsView"
         x:DataType="viewModels:SettingsViewModel">
@@ -15,14 +14,6 @@
     
     <Border CornerRadius="4" Padding="16">
         <StackPanel Spacing="8">
-            <avalonia:MaterialIcon
-                Kind="Home"
-                Foreground="Red"
-                Background="Red"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Width="32"
-                Height="32" />
             <!-- Period -->
             <UniformGrid Columns="2">
                 <TextBlock Text="Period:" VerticalAlignment="Center" />
@@ -40,18 +31,17 @@
             <!-- Color -->
           <UniformGrid Columns="2">
               <TextBlock Text="Color:" VerticalAlignment="Center" />
-              <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
+              <ComboBox SelectedIndex="{Binding Color}" HorizontalAlignment="Stretch">
                   <ComboBoxItem>Red</ComboBoxItem>
                   <ComboBoxItem>Green</ComboBoxItem>
                   <ComboBoxItem>Blue</ComboBoxItem>
-                  <ComboBoxItem>Black</ComboBoxItem>
               </ComboBox>
           </UniformGrid>
     
             <!-- Shape -->
             <UniformGrid Columns="2">
                 <TextBlock Text="Shape:" VerticalAlignment="Center" />
-                <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch">
+                <ComboBox Name="ShapeCombobox" SelectedIndex="{Binding ShapeType}" HorizontalAlignment="Stretch">
                     <ComboBoxItem>Triangle</ComboBoxItem>
                     <ComboBoxItem>Rectangle</ComboBoxItem>
                     <ComboBoxItem>Circle</ComboBoxItem>
