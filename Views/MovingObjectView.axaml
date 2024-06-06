@@ -14,7 +14,7 @@
 
     <UniformGrid Columns="1">
         <Canvas>
-            <Ellipse Width="50" Height="50" Fill="{Binding Settings.IconColor}" Canvas.Left="{Binding XPosition}" Canvas.Top="{Binding YPosition}"></Ellipse>
+            <Ellipse Width="{Binding Settings.Size}" Height="{Binding Settings.Size}" Fill="{Binding Settings.IconColor}" Canvas.Left="{Binding XPosition}" Canvas.Top="{Binding YPosition}"></Ellipse>
         </Canvas>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Start" HorizontalAlignment="Center"
