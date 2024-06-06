@@ -1,7 +1,6 @@
 using System;
 using System.Reactive;
 using System.Threading.Tasks;
-using Avalonia.Media;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -9,6 +8,9 @@ namespace EmdrProject.ViewModels;
 
 public class MovingObjectViewModel : ReactiveObject
 {
+    
+    [Reactive] public SettingsViewModel Settings { get; set; } = new();
+
     // Reactive attributes
     [Reactive] private bool IsMovingStarted { get; set; }
     [Reactive] private bool IsLeft { get; set; } = true;
@@ -19,13 +21,11 @@ public class MovingObjectViewModel : ReactiveObject
     // Primitive types
     private double _xPosition;
     private double _yPosition;
-    private SolidColorBrush? _color;
 
 
     public MovingObjectViewModel()
     {
         XPosition = 0;
-        Color = SolidColorBrush.Parse("#FF0000"); // kırmızı renk atanıyor.
 
         StartMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = true; });
 
@@ -100,13 +100,7 @@ public class MovingObjectViewModel : ReactiveObject
         get => _yPosition;
         set => this.RaiseAndSetIfChanged(ref _yPosition, value);
     }
-
-    public SolidColorBrush Color
-    {
-        get => _color;
-        set => this.RaiseAndSetIfChanged(ref _color, value);
-    }
-
+    
     public ReactiveCommand<Unit, Unit> StartMovingCommand { get; set; }
     public ReactiveCommand<Unit, Unit> StopMovingCommand { get; set; }
 }

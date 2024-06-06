@@ -24,7 +24,7 @@
             <Button.Flyout>
                 <!-- Flyout -->
                 <Flyout>
-                   <views:SettingsView DataContext="{Binding Settings}" />
+                   <views:SettingsView DataContext="{Binding MovingObject.Settings}" />
                 </Flyout>
             </Button.Flyout>
         </Button>
