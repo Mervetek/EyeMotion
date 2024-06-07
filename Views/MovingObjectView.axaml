@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
+             xmlns:enums="clr-namespace:EmdrProject.Enums"
              x:DataType="viewModels:MovingObjectViewModel"
              mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="1000"
 
@@ -16,11 +17,11 @@
         <DockPanel>
             <Canvas>
                 <Ellipse Width="{Binding Settings.Size}" Height="{Binding Settings.Size}"
-                         Fill="{Binding Settings.IconColor}" Canvas.Left="{Binding XPosition}"
+                         Fill="{Binding IconColor}" Canvas.Left="{Binding XPosition}"
                          Canvas.Top="{Binding YPosition}">
                 </Ellipse>
             </Canvas>
-            <StackPanel DockPanel.Dock="Bottom" Margin="0,460,0,0" Spacing="2">
+            <StackPanel DockPanel.Dock="Bottom" Margin="0,420,0,0" Spacing="2">
                 <Border CornerRadius="24" Background="LightGray" Height="60" Margin="0,235,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Width="50" Height="50" HorizontalAlignment="Center"
@@ -39,7 +40,7 @@
                         </Button>
                     </StackPanel>
                 </Border>
-                <Border CornerRadius="24" Background="LightGray" Height="40" VerticalAlignment="Bottom"
+                <Border CornerRadius="24" Background="LightGray" Height="80" VerticalAlignment="Bottom"
                         Margin="0,0,0,2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="24">
                         <StackPanel Orientation="Horizontal">
@@ -51,8 +52,40 @@
                             <TextBlock Text="Speed" VerticalAlignment="Center" />
                             <Slider Minimum="10" Maximum="100"
                                     Width="100"
+                                    Margin="0,15,0,0"
                                     TickFrequency="10"
                                     Value="{Binding Speed}"  />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <UniformGrid Columns="3">
+                                <Button Width="20" Height="20" Margin="2" Background="Aqua" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>Aqua</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="Lime" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>Lime</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="Blue" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>Blue</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="Purple" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>Purple</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="DeepSkyBlue" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>DeepSkyBlue</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="Brown" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>Brown</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="MediumSlateBlue" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>MediumSlateBlue</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="Red" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>Red</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                                <Button Width="20" Height="20" Margin="2" Background="OrangeRed" Command="{Binding AdjustColorCommand}">
+                                    <Button.CommandParameter><enums:ShapeColor>OrangeRed</enums:ShapeColor></Button.CommandParameter>
+                                </Button>
+                            </UniformGrid>
                         </StackPanel>
                     </StackPanel>
                 </Border>

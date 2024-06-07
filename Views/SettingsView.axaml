@@ -8,7 +8,7 @@
         x:DataType="viewModels:SettingsViewModel">
    
     <Design.DataContext>
-        <viewModels:SettingsViewModel Color="Red" />
+        <viewModels:SettingsViewModel />
     </Design.DataContext>
     
     
@@ -16,16 +16,6 @@
         <StackPanel Spacing="8">
             
 
-    
-            <!-- Color -->
-          <UniformGrid Columns="2">
-              <TextBlock Text="Color:" VerticalAlignment="Center" />
-              <ComboBox SelectedIndex="{Binding Color}" HorizontalAlignment="Stretch">
-                  <ComboBoxItem>Red</ComboBoxItem>
-                  <ComboBoxItem>Green</ComboBoxItem>
-                  <ComboBoxItem>Blue</ComboBoxItem>
-              </ComboBox>
-          </UniformGrid>
     
             <!-- Shape -->
             <UniformGrid Columns="2">

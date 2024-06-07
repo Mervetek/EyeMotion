@@ -1,6 +1,8 @@
 using System;
 using System.Reactive;
 using System.Threading.Tasks;
+using Avalonia.Media;
+using EmdrProject.Enums;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -17,6 +19,9 @@ public class MovingObjectViewModel : ReactiveObject
     [Reactive] public int CurrentCycle { get; set; } = 0;
     [Reactive] public int RepeatCount { get; set; } = 20;
     [Reactive] public int Speed { get; set; } = 10;
+    
+    [Reactive] public ShapeColor Color { get; set; } = ShapeColor.Blue;
+    [Reactive] public IBrush? IconColor { get; set; } = Brushes.Chocolate;
 
 
 
@@ -33,6 +38,11 @@ public class MovingObjectViewModel : ReactiveObject
         StartMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = true; });
 
         StopMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = false; });
+        
+        AdjustColorCommand = ReactiveCommand.Create<ShapeColor>(param =>
+        {
+            IconColor = HandleColor(param);
+        });
 
         this.WhenAnyValue(model => model.IsMovingStarted).Subscribe(async isMovingStarted =>
         {
@@ -51,12 +61,34 @@ public class MovingObjectViewModel : ReactiveObject
             if (isRight)
                 IsLeft = false;
         });
-        
-        this.WhenAnyValue(model => model.Speed).Subscribe(async speed =>
+
+    }
+    
+    private static IBrush HandleColor(ShapeColor color)
+    {
+        switch (color)
         {
-           
-              Console.WriteLine(speed);
-        });
+            case ShapeColor.Aqua:
+                return Brushes.Aqua;
+            case ShapeColor.Lime:
+                return Brushes.Lime;
+            case ShapeColor.Blue:
+                return Brushes.Blue;
+            case ShapeColor.Purple:
+                return Brushes.Purple;
+            case ShapeColor.DeepSkyBlue:
+                return Brushes.DeepSkyBlue;
+            case ShapeColor.Brown:
+                return Brushes.Brown;
+            case ShapeColor.MediumSlateBlue:
+                return Brushes.MediumSlateBlue;
+            case ShapeColor.Red:
+                return Brushes.Red;
+            case ShapeColor.OrangeRed:
+                return Brushes.OrangeRed;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(color), color, null);
+        }
     }
 
 
@@ -89,10 +121,11 @@ public class MovingObjectViewModel : ReactiveObject
         {
             IsRight = true;
             CurrentCycle++;
-            if (CurrentCycle >= RepeatCount)
+            if (CurrentCycle == RepeatCount)
             {
                 IsMovingStarted = false;
                 XPosition /= 2;
+                CurrentCycle = 0;
             }
         }
         else
@@ -115,4 +148,5 @@ public class MovingObjectViewModel : ReactiveObject
 
     public ReactiveCommand<Unit, Unit> StartMovingCommand { get; set; }
     public ReactiveCommand<Unit, Unit> StopMovingCommand { get; set; }
+    public ReactiveCommand<ShapeColor, Unit> AdjustColorCommand { get; set; }
 }
