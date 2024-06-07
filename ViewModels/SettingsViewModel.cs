@@ -24,7 +24,6 @@ public class SettingsViewModel : ViewModelBase
 
     [Reactive] public int Speed { get; set; } = 10;
     [Reactive] public ShapeColor Color { get; set; } = ShapeColor.Blue;
-    [Reactive] public int RepeatCount { get; set; } = 30;
     [Reactive] public ShapeSize ShapeSize { get; set; } = ShapeSize.Medium;
     [Reactive] public int Size { get; set; } = 30;
     [Reactive] public string? IconName { get; set; }

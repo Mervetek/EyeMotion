@@ -8,18 +8,13 @@
         x:DataType="viewModels:SettingsViewModel">
    
     <Design.DataContext>
-        <viewModels:SettingsViewModel RepeatCount="30" Speed="10" Color="Red" />
+        <viewModels:SettingsViewModel Speed="10" Color="Red" />
     </Design.DataContext>
     
     
     <Border CornerRadius="4" Padding="16">
         <StackPanel Spacing="8">
-            <!-- Period -->
-            <UniformGrid Columns="2">
-                <TextBlock Text="Period:" VerticalAlignment="Center" />
-                <TextBox Text="{Binding RepeatCount}" />
-            </UniformGrid>
-    
+            
             <!-- Speed -->
             <UniformGrid Columns="2">
                 <TextBlock Text="Speed:" VerticalAlignment="Center" />

@@ -8,7 +8,6 @@ namespace EmdrProject.ViewModels;
 
 public class MovingObjectViewModel : ReactiveObject
 {
-    
     [Reactive] public SettingsViewModel Settings { get; set; } = new();
 
     // Reactive attributes
@@ -16,7 +15,9 @@ public class MovingObjectViewModel : ReactiveObject
     [Reactive] private bool IsLeft { get; set; } = true;
     [Reactive] private bool IsRight { get; set; }
     [Reactive] private int Amount { get; set; } = 20;
-    
+    [Reactive] public int CurrentCycle { get; set; } = 0;
+    [Reactive] public int RepeatCount { get; set; } = 2;
+
 
     // Primitive types
     private double _xPosition;
@@ -26,6 +27,7 @@ public class MovingObjectViewModel : ReactiveObject
     public MovingObjectViewModel()
     {
         XPosition = 0;
+        _yPosition = 220;
 
         StartMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = true; });
 
@@ -48,8 +50,6 @@ public class MovingObjectViewModel : ReactiveObject
             if (isRight)
                 IsLeft = false;
         });
-        
-       
     }
 
 
@@ -78,10 +78,15 @@ public class MovingObjectViewModel : ReactiveObject
 
     private void UpdateEdge(double xPosition)
     {
-
-        if (xPosition >= 750)
+        if (xPosition >= 1850)
         {
             IsRight = true;
+            CurrentCycle++;
+            if (CurrentCycle >= RepeatCount)
+            {
+                IsMovingStarted = false;
+                XPosition /= 2;
+            }
         }
         else
         {
@@ -100,7 +105,7 @@ public class MovingObjectViewModel : ReactiveObject
         get => _yPosition;
         set => this.RaiseAndSetIfChanged(ref _yPosition, value);
     }
-    
+
     public ReactiveCommand<Unit, Unit> StartMovingCommand { get; set; }
     public ReactiveCommand<Unit, Unit> StopMovingCommand { get; set; }
 }
