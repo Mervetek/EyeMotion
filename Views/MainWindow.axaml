@@ -19,20 +19,7 @@
     </Design.DataContext>
 
     <DockPanel Margin="8">
-        <!-- </Menu> -->
-        <Button DockPanel.Dock="Top" Content="Settings">
-            <Button.Flyout>
-                <!-- Flyout -->
-                <Flyout>
-                   <views:SettingsView DataContext="{Binding MovingObject.Settings}" />
-                </Flyout>
-            </Button.Flyout>
-        </Button>
-        
-        <!-- Ana içerik buraya eklenebilir -->
-        
         <views:MovingObjectView Margin="0,159,0,0" DataContext="{Binding MovingObject}" />
-
     </DockPanel>
 
 </Window>

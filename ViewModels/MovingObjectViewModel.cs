@@ -10,7 +10,6 @@ namespace EmdrProject.ViewModels;
 
 public class MovingObjectViewModel : ReactiveObject
 {
-    [Reactive] public SettingsViewModel Settings { get; set; } = new();
 
     // Reactive attributes
     [Reactive] private bool IsMovingStarted { get; set; }
@@ -18,17 +17,15 @@ public class MovingObjectViewModel : ReactiveObject
     [Reactive] private bool IsRight { get; set; }
     [Reactive] public int CurrentCycle { get; set; } = 0;
     [Reactive] public int RepeatCount { get; set; } = 20;
-    [Reactive] public int Speed { get; set; } = 10;
+    [Reactive] public int Speed { get; set; } = 20;
     
     [Reactive] public ShapeColor Color { get; set; } = ShapeColor.Blue;
     [Reactive] public IBrush? IconColor { get; set; } = Brushes.Chocolate;
-
-
-
+    [Reactive] public int Size { get; set; } = 30;
+    
     // Primitive types
     private double _xPosition;
     private double _yPosition;
-
 
     public MovingObjectViewModel()
     {

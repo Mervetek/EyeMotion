@@ -16,7 +16,7 @@
     <DockPanel>
         <DockPanel>
             <Canvas>
-                <Ellipse Width="{Binding Settings.Size}" Height="{Binding Settings.Size}"
+                <Ellipse Width="{Binding Size}" Height="{Binding Size}"
                          Fill="{Binding IconColor}" Canvas.Left="{Binding XPosition}"
                          Canvas.Top="{Binding YPosition}">
                 </Ellipse>
@@ -48,14 +48,23 @@
                             <TextBlock Text="Repeat of " VerticalAlignment="Center" />
                             <TextBox Text="{Binding RepeatCount}" VerticalAlignment="Center" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock Text="Speed" VerticalAlignment="Center" />
-                            <Slider Minimum="10" Maximum="100"
-                                    Width="100"
-                                    Margin="0,15,0,0"
-                                    TickFrequency="10"
-                                    Value="{Binding Speed}"  />
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="Speed" VerticalAlignment="Center" />
+                                <Slider Minimum="10" Maximum="100"
+                                        Width="100"
+                                        Margin="0,15,0,0"
+                                        TickFrequency="10"
+                                        Value="{Binding Speed}"  />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="Size" VerticalAlignment="Center" />
+                                <Slider Minimum="10" Maximum="100"
+                                        Width="100"
+                                        Margin="0,15,0,0"
+                                        TickFrequency="10"
+                                        Value="{Binding Size}"  />
+                            </StackPanel>
+                      
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <UniformGrid Columns="3">
                                 <Button Width="20" Height="20" Margin="2" Background="Aqua" Command="{Binding AdjustColorCommand}">
