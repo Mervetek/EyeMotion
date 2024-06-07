@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:EmdrProject.ViewModels"
              x:DataType="viewModels:MovingObjectViewModel"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1800" d:DesignHeight="1000"
 
              x:Class="EmdrProject.Views.MovingObjectView">
 
@@ -23,24 +23,36 @@
             <StackPanel DockPanel.Dock="Bottom" Margin="0,460,0,0" Spacing="2">
                 <Border CornerRadius="24" Background="LightGray" Height="60" Margin="0,235,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Width="50" Height="50" HorizontalAlignment="Center" Command="{Binding StartMovingCommand}">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Width="50" Height="50" HorizontalAlignment="Center"
+                                Command="{Binding StartMovingCommand}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
                                 <Image Source="D:\workspace\workspace\mbsayin\Assets\play.png" />
                             </StackPanel>
                         </Button>
-                        <Button Width="50" Height="50" HorizontalAlignment="Center" Command="{Binding StopMovingCommand}">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Width="50" Height="50" HorizontalAlignment="Center"
+                                Command="{Binding StopMovingCommand}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
                                 <Image Source="D:\workspace\workspace\mbsayin\Assets\pause.png" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
                 </Border>
-                <Border CornerRadius="24" Background="LightGray" Height="40" VerticalAlignment="Bottom" Margin="0,0,0,2">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Border CornerRadius="24" Background="LightGray" Height="40" VerticalAlignment="Bottom"
+                        Margin="0,0,0,2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="24">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding CurrentCycle}" Margin="0,0,12,0" VerticalAlignment="Center" />
                             <TextBlock Text="Repeat of " VerticalAlignment="Center" />
                             <TextBox Text="{Binding RepeatCount}" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Speed" VerticalAlignment="Center" />
+                            <Slider Minimum="10" Maximum="100"
+                                    Width="100"
+                                    TickFrequency="10"
+                                    Value="{Binding Speed}"  />
                         </StackPanel>
                     </StackPanel>
                 </Border>

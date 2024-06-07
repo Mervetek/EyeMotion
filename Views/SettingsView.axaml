@@ -8,20 +8,14 @@
         x:DataType="viewModels:SettingsViewModel">
    
     <Design.DataContext>
-        <viewModels:SettingsViewModel Speed="10" Color="Red" />
+        <viewModels:SettingsViewModel Color="Red" />
     </Design.DataContext>
     
     
     <Border CornerRadius="4" Padding="16">
         <StackPanel Spacing="8">
             
-            <!-- Speed -->
-            <UniformGrid Columns="2">
-                <TextBlock Text="Speed:" VerticalAlignment="Center" />
-                <NumericUpDown Minimum="10" Maximum="100"
-                               Increment="1" Value="10"
-                               Text="{Binding Speed}" />
-            </UniformGrid>
+
     
             <!-- Color -->
           <UniformGrid Columns="2">

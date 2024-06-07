@@ -14,9 +14,10 @@ public class MovingObjectViewModel : ReactiveObject
     [Reactive] private bool IsMovingStarted { get; set; }
     [Reactive] private bool IsLeft { get; set; } = true;
     [Reactive] private bool IsRight { get; set; }
-    [Reactive] private int Amount { get; set; } = 20;
     [Reactive] public int CurrentCycle { get; set; } = 0;
-    [Reactive] public int RepeatCount { get; set; } = 2;
+    [Reactive] public int RepeatCount { get; set; } = 20;
+    [Reactive] public int Speed { get; set; } = 10;
+
 
 
     // Primitive types
@@ -50,6 +51,12 @@ public class MovingObjectViewModel : ReactiveObject
             if (isRight)
                 IsLeft = false;
         });
+        
+        this.WhenAnyValue(model => model.Speed).Subscribe(async speed =>
+        {
+           
+              Console.WriteLine(speed);
+        });
     }
 
 
@@ -60,14 +67,14 @@ public class MovingObjectViewModel : ReactiveObject
             if (IsLeft)
             {
                 await Task.Delay(20);
-                XPosition += Amount;
+                XPosition += Speed;
                 UpdateEdge(XPosition);
             }
 
             else
             {
                 await Task.Delay(20);
-                XPosition -= Amount;
+                XPosition -= Speed;
                 if (XPosition <= 0)
                 {
                     IsLeft = true;
