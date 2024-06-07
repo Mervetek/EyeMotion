@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Media;
@@ -10,7 +11,6 @@ namespace EmdrProject.ViewModels;
 
 public class MovingObjectViewModel : ReactiveObject
 {
-
     // Reactive attributes
     [Reactive] private bool IsMovingStarted { get; set; }
     [Reactive] private bool IsLeft { get; set; } = true;
@@ -18,11 +18,11 @@ public class MovingObjectViewModel : ReactiveObject
     [Reactive] public int CurrentCycle { get; set; } = 0;
     [Reactive] public int RepeatCount { get; set; } = 20;
     [Reactive] public int Speed { get; set; } = 20;
-    
+
     [Reactive] public ShapeColor Color { get; set; } = ShapeColor.Blue;
     [Reactive] public IBrush? IconColor { get; set; } = Brushes.Chocolate;
     [Reactive] public int Size { get; set; } = 30;
-    
+
     // Primitive types
     private double _xPosition;
     private double _yPosition;
@@ -35,11 +35,8 @@ public class MovingObjectViewModel : ReactiveObject
         StartMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = true; });
 
         StopMovingCommand = ReactiveCommand.Create(() => { IsMovingStarted = false; });
-        
-        AdjustColorCommand = ReactiveCommand.Create<ShapeColor>(param =>
-        {
-            IconColor = HandleColor(param);
-        });
+
+        AdjustColorCommand = ReactiveCommand.Create<ShapeColor>(param => { IconColor = HandleColor(param); });
 
         this.WhenAnyValue(model => model.IsMovingStarted).Subscribe(async isMovingStarted =>
         {
@@ -58,9 +55,8 @@ public class MovingObjectViewModel : ReactiveObject
             if (isRight)
                 IsLeft = false;
         });
-
     }
-    
+
     private static IBrush HandleColor(ShapeColor color)
     {
         switch (color)
@@ -97,7 +93,7 @@ public class MovingObjectViewModel : ReactiveObject
             {
                 await Task.Delay(20);
                 XPosition += Speed;
-                UpdateEdge(XPosition);
+                await UpdateEdge(XPosition);
             }
 
             else
@@ -112,7 +108,7 @@ public class MovingObjectViewModel : ReactiveObject
         }
     }
 
-    private void UpdateEdge(double xPosition)
+    private async Task UpdateEdge(double xPosition)
     {
         if (xPosition >= 1850)
         {
@@ -121,8 +117,24 @@ public class MovingObjectViewModel : ReactiveObject
             if (CurrentCycle == RepeatCount)
             {
                 IsMovingStarted = false;
-                XPosition /= 2;
                 CurrentCycle = 0;
+
+                while (true)
+                {
+                    if (XPosition >= 925)
+                    {
+                        XPosition -= Speed;
+                        if(Speed >= 30)
+                            Speed -= 6;
+                        await Task.Delay(10);
+                    }
+                    else
+                    {
+                        XPosition = 925;
+                        Speed = 0;
+                        break;
+                    }
+                }
             }
         }
         else
